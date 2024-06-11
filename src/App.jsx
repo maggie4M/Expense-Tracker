@@ -1,35 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ExpenseItem from './components/ExpenseItem';
+import AddExpense from './components/AddExpense';
+import SetLimit from './components/SetLimit';
+import ExpenseChart from './components/ExpenseChart';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [expenses, setExpenses] = useState([]);
+    const [limit, setLimit] = useState(0);
+    const [total, setTotal] = useState(0);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    useEffect(() => {
+        axios.get('http://localhost:8000/expenses')
+            .then(response => {
+                setExpenses(response.data);
+                calculateTotal(response.data);
+            })
+            .catch(error => console.error(error));
 
-export default App
+        axios.get('http://localhost:8000/limit')
+            .then(response => setLimit(response.data.limit))
+            .catch(error => console.error(error));
+    }, []);
+
+    const calculateTotal = (expenses) => {
+        const total = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+        setTotal(total);
+    };
+
+    const addExpense = (expense) => {
+        if (total + expense.amount > limit) {
+            alert("Expense exceeds the spending limit!");
+            return;
+        }
+        axios.post('http://localhost:8000/expenses', expense)
+            .then(response => {
+                const newExpenses = [...expenses, response.data];
+                setExpenses(newExpenses);
+                calculateTotal(newExpenses);
+            })
+            .catch(error => console.error(error));
+    };
+
+    const deleteExpense = (id) => {
+        axios.delete(`http://localhost:8000/expenses/${id}`)
+            .then(() => {
+                const newExpenses = expenses.filter(exp => exp.id !== id);
+                setExpenses(newExpenses);
+                calculateTotal(newExpenses);
+            })
+            .catch(error => console.error(error));
+    };
+
+    const setSpendingLimit = (newLimit) => {
+        axios.post('http://localhost:8000/limit', { limit: newLimit })
+            .then(response => setLimit(response.data.limit))
+            .catch(error => console.error(error));
+    };
+
+    return (
+        <div>
+            <h1>Expense Tracker</h1>
+            <SetLimit setLimit={setSpendingLimit} />
+            <div>
+                <h2>Spending Limit: ${limit}</h2>
+                <h2>Total Spent: ${total}</h2>
+                <progress value={total} max={limit}></progress>
+            </div>
+            <AddExpense addExpense={addExpense} />
+            <ExpenseChart expenses={expenses} />
+            <ul>
+                {expenses.map(expense => (
+                    <ExpenseItem key={expense.id} expense={expense} deleteExpense={deleteExpense} />
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default App;
