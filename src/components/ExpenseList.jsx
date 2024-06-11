@@ -4,6 +4,7 @@ import axios from 'axios';
 import ExpenseItem from './ExpenseItem';
 import AddExpense from './AddExpense';
 import SetLimit from './SetLimit';
+import ExpenseChart from './ExpenseChart';
 
 const ExpenseList = () => {
     const [expenses, setExpenses] = useState([]);
@@ -68,6 +69,7 @@ const ExpenseList = () => {
                 <progress value={total} max={limit}></progress>
             </div>
             <AddExpense addExpense={addExpense} />
+            <ExpenseChart expenses={expenses} />
             <ul>
                 {expenses.map(expense => (
                     <ExpenseItem key={expense.id} expense={expense} deleteExpense={deleteExpense} />
