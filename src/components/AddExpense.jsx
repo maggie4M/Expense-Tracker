@@ -44,7 +44,7 @@ const AddExpense = ({ addExpense }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Description"
             />
-            <button type="submit">Add Expense</button>
+            <button className="button" style="vertical-align:middle"type="submit">Add <span>Expense</span></button>
         </form>
     );
 };
