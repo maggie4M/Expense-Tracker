@@ -4,6 +4,7 @@ import ExpenseItem from './components/ExpenseItem';
 import AddExpense from './components/AddExpense';
 import SetLimit from './components/SetLimit';
 import ExpenseChart from './components/ExpenseChart';
+import './App.css';
 
 const App = () => {
     const [expenses, setExpenses] = useState([]);
