@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Expenses from './pages/Expenses';
-import AddExpensePage from './pages/AddExpensePage';
-import Stats from './pages/Stats';
+import Dashboard from './Pages/Dashboard';
+import Expenses from './Pages/Expenses';
+import AddExpensePage from './Pages/AddExpensePage';
+import Stats from './Pages/Stats';
 import './App.css';
 
 const App = () => {
@@ -62,11 +62,11 @@ const App = () => {
 
     return (
         <Router>
-            <nav>
-                <Link to="/">Dashboard</Link>
-                <Link to="/stats">Stats</Link>
-                <Link to="/expenses">Expenses</Link>
-                <Link to="/add-expense">Add Expense</Link>
+            <nav className="navbar">
+                <Link to="/" className="nav-link">Dashboard</Link>
+                <Link to="/stats"className="nav-link" >Stats</Link>
+                <Link to="/expenses"className="nav-link" >Expenses</Link>
+                <Link to="/add-expense"className="nav-link" >Add Expense</Link>
             </nav>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
