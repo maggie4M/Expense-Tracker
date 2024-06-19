@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Dashboard from './Pages/Dashboard';
-import Expenses from './Pages/Expenses';
-import AddExpensePage from './Pages/AddExpensePage';
+import Dashboard from './pages/Dashboard';
+import Expenses from './pages/Expenses';
+import AddExpensePage from './pages/AddExpensePage';
+import Stats from './pages/Stats';
 import './App.css';
 
 const App = () => {
@@ -63,11 +64,13 @@ const App = () => {
         <Router>
             <nav>
                 <Link to="/">Dashboard</Link>
+                <Link to="/stats">Stats</Link>
                 <Link to="/expenses">Expenses</Link>
                 <Link to="/add-expense">Add Expense</Link>
             </nav>
             <Routes>
-                <Route path="/" element={<Dashboard
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/stats" element={<Stats
                     expenses={expenses}
                     limit={limit}
                     total={total}
