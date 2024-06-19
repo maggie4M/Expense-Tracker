@@ -10,10 +10,15 @@ const SetLimit = ({ setLimit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="number" placeholder="Set Limit" value={limit} onChange={(e) => setLimitValue(e.target.value)} required />
-            <button type="submit">Set Limit</button>
-        </form>
+        <div className="login-box">
+            <form onSubmit={handleSubmit}> 
+                <div className="user-box">  <input type="text" name="username" value={limit} onChange={(e) => setLimitValue(e.target.value)} required />
+                </div>
+                <center>
+                    <button type="submit">Set Limit</button>
+                </center>
+            </form>
+        </div>
     );
 };
 
