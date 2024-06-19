@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ExpenseItem from './components/ExpenseItem';
-import AddExpense from './components/AddExpense';
-import SetLimit from './components/SetLimit';
-import ExpenseChart from './components/ExpenseChart';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Dashboard from './Pages/Dashboard';
+import Expenses from './Pages/Expenses';
+import AddExpensePage from './Pages/AddExpensePage';
 import './App.css';
 
 const App = () => {
@@ -60,22 +60,28 @@ const App = () => {
     };
 
     return (
-        <div>
-            <h1>Expense Tracker</h1>
-            <SetLimit setLimit={setSpendingLimit} />
-            <div>
-                <h2>Spending Limit: ${limit}</h2>
-                <h2>Total Spent: ${total}</h2>
-                <progress value={total} max={limit}></progress>
-            </div>
-            <AddExpense addExpense={addExpense} />
-            <ExpenseChart expenses={expenses} />
-            <ul>
-                {expenses.map(expense => (
-                    <ExpenseItem key={expense.id} expense={expense} deleteExpense={deleteExpense} />
-                ))}
-            </ul>
-        </div>
+        <Router>
+            <nav>
+                <Link to="/">Dashboard</Link>
+                <Link to="/expenses">Expenses</Link>
+                <Link to="/add-expense">Add Expense</Link>
+            </nav>
+            <Routes>
+                <Route path="/" element={<Dashboard
+                    expenses={expenses}
+                    limit={limit}
+                    total={total}
+                    setSpendingLimit={setSpendingLimit}
+                />} />
+                <Route path="/expenses" element={<Expenses
+                    expenses={expenses}
+                    deleteExpense={deleteExpense}
+                />} />
+                <Route path="/add-expense" element={<AddExpensePage
+                    addExpense={addExpense}
+                />} />
+            </Routes>
+        </Router>
     );
 };
 

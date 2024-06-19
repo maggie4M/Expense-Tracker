@@ -1,32 +1,18 @@
-// src/components/ExpenseChart.jsx
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
-
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+import 'chart.js/auto';
 
 const ExpenseChart = ({ expenses }) => {
-    const categories = [...new Set(expenses.map(expense => expense.category))];
     const data = {
-        labels: categories,
+        labels: expenses.map(expense => expense.category),
         datasets: [{
             label: 'Expenses',
-            data: categories.map(category => {
-                return expenses.filter(expense => expense.category === category)
-                    .reduce((acc, expense) => acc + expense.amount, 0);
-            }),
+            data: expenses.map(expense => expense.amount),
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
+        }],
     };
 
-    return (
-        <div>
-            <h2>Expense Chart</h2>
-            <Bar data={data} />
-        </div>
-    );
+    return <Bar data={data} />;
 };
 
 export default ExpenseChart;

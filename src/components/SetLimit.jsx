@@ -1,24 +1,17 @@
-// src/components/SetLimit.jsx
 import React, { useState } from 'react';
 
 const SetLimit = ({ setLimit }) => {
-    const [limit, setLimitState] = useState('');
+    const [limit, setLimitValue] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setLimit(parseFloat(limit));
-        setLimitState('');
+        setLimitValue('');
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type="number"
-                value={limit}
-                onChange={(e) => setLimitState(e.target.value)}
-                placeholder="Set Spending Limit"
-                required
-            />
+            <input type="number" placeholder="Set Limit" value={limit} onChange={(e) => setLimitValue(e.target.value)} required />
             <button type="submit">Set Limit</button>
         </form>
     );
