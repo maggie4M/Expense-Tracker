@@ -1,4 +1,3 @@
-// src/components/AddExpense.jsx
 import React, { useState } from 'react';
 
 const AddExpense = ({ addExpense }) => {
@@ -9,15 +8,20 @@ const AddExpense = ({ addExpense }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addExpense({ amount: parseFloat(amount), category, date, description });
-        setAmount('');
-        setCategory('');
-        setDate('');
-        setDescription('');
+        const parsedAmount = parseFloat(amount);
+        if (!isNaN(parsedAmount) && parsedAmount > 0) {
+            addExpense({ amount: parsedAmount, category, date, description });
+            setAmount('');
+            setCategory('');
+            setDate('');
+            setDescription('');
+        } else {
+            alert("Please enter a valid amount.");
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='expense-form'>
             <input
                 type="number"
                 value={amount}
@@ -36,6 +40,7 @@ const AddExpense = ({ addExpense }) => {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+                placeholder="Date"
                 required
             />
             <input
@@ -44,7 +49,7 @@ const AddExpense = ({ addExpense }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Description"
             />
-            <button type="submit">Add Expense </button>
+            <button type="submit">Add Expense</button>
         </form>
     );
 };

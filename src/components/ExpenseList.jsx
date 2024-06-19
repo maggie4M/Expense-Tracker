@@ -64,8 +64,8 @@ const ExpenseList = () => {
             <h1>Expense Tracker</h1>
             <SetLimit setLimit={setSpendingLimit} />
             <div>
-                <h2>Spending Limit: ${limit}</h2>
-                <h2>Total Spent: ${total}</h2>
+            <h2>Spending Limit: ${limit.toFixed(2)}</h2>
+            <h2>Total Spent: ${total.toFixed(2)}</h2>
                 <progress value={total} max={limit}></progress>
             </div>
             <AddExpense addExpense={addExpense} />

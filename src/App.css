@@ -133,22 +133,25 @@ button {
 }
 .navbar {
   background-color: antiquewhite;
-  padding: 10px 20px; 
+  padding: 10px 20px;
   display: flex;
-  justify-content: flex-end; 
-  width: 102.2%;
-}
-.nav-link {
-  color: black; 
-  text-decoration: none; 
-  margin-left: 20px;
-  font-size: 1 em; 
+  justify-content: flex-end;
+  width: 102.2%; 
 }
 
-.nav-link :hover {
-  text-decoration: underline;
-  color: lightcoral;
+.nav-link {
+  color: black;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 1em;
 }
+
+.nav-link:hover {    
+  text-decoration: underline;
+  color: lightcoral; 
+}
+
+
 .card2 {
   width: 1200px;
   height: 150px;
@@ -557,4 +560,172 @@ button {
   height: 2px;
   background: linear-gradient(90deg, transparent, #03f40f);
   animation: btn-anim1 2s linear infinite;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 40vh;
+  width: 50vw;
+}
+
+.left-side, .right-side {
+  margin-bottom: 20px; 
+}
+
+.expense-container {
+  margin-top: 20px;
+}
+
+.card3, .post, .new, .arrow {
+  margin-bottom: 20px;
+}
+.expense-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  max-width: 1000px; /* Adjust the max-width as needed */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+.expense-form input,
+.expense-form button {
+  width: 100%; /* Make inputs and button take full width of the container */
+  padding: 10px; /* Add some padding for better appearance */
+  border: 1px solid #ccc; /* Border styling */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+.expense-form input {
+  width: 1000px; /* Minimum width for the inputs */
+}
+
+.expense-form button {
+  flex: 0 1 auto; /* Button does not need to grow, only shrink if necessary */
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 10px 20px; /* Add some padding for the button */
+}
+
+
+.expense-form button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items horizontally */
+  gap: 20px; /* Space between each element */
+  max-width: 1000px; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Add padding around the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better appearance */
+  border-radius: 8px; /* Optional: Rounded corners */
+  background-color: #f9f9f9; /* Optional: Background color */
+}
+
+.stats-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items horizontally */
+  gap: 10px; /* Space between each piece of info */
+  width: 100%; /* Take full width of the container */
+  text-align: center; /* Center align text */
+}
+
+progress {
+  width: 100%; 
+  height: 20px; 
+}
+.card-container {
+  width: 1020px;
+  max-width: 1020px; 
+  height: 300px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card4 {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.card4 .front-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+.card4 .front-content p {
+  font-size: 32px;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+.card4 .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
+  color: #e8e8e8;
+  padding: 20px;
+  line-height: 1.5;
+  border-radius: 5px;
+  pointer-events: none;
+  transform: translateY(-96%);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card4 .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card4:hover .content {
+  transform: translateY(0);
+}
+
+.card4:hover .front-content {
+  transform: translateY(30%);
+}
+
+.card4:hover .front-content p {
+  opacity: 0;
+}
+.expenses-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenses-table th, .expenses-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.expenses-table th {
+  background-color: #f4f4f4;
 }

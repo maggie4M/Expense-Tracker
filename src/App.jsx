@@ -64,17 +64,13 @@ const App = () => {
         <Router>
             <nav className="navbar">
                 <Link to="/" className="nav-link">Dashboard</Link>
-                <Link to="/stats"className="nav-link" >Stats</Link>
-                <Link to="/expenses"className="nav-link" >Expenses</Link>
-                <Link to="/add-expense"className="nav-link" >Add Expense</Link>
+                <Link to="/stats" className="nav-link">Stats</Link>
+                <Link to="/expenses" className="nav-link">Expenses</Link>
+                <Link to="/add-expense" className="nav-link">Add Expense</Link>
             </nav>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/stats" element={<Stats
-                    expenses={expenses}
-                    limit={limit}
-                    total={total}
-                    setSpendingLimit={setSpendingLimit}
                 />} />
                 <Route path="/expenses" element={<Expenses
                     expenses={expenses}
@@ -82,6 +78,7 @@ const App = () => {
                 />} />
                 <Route path="/add-expense" element={<AddExpensePage
                     addExpense={addExpense}
+                    expenses={expenses}
                 />} />
             </Routes>
         </Router>
